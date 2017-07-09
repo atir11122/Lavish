@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Remail";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+
+<head>
+    <title>Password recovery</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" href="~/Content/bootstrap.css" rel="stylesheet">
+    <link type="text/css" href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="~/Content/form.css" rel="stylesheet">
+</head>
+<body>
+
+    <script>
+        $(document).ready(function () {
+            $("#b1").click(function () {
+                var u = $("#remail").val();
+                $.getJson("Home/Check?remail" + remail, function (data) {
+                    if (data) {
+                        $("#result").text("Not available");
+
+
+                    }
+                    else {
+                        $("#result").text("available");
+
+                    }
+
+                });
+
+            });
+
+        });
+
+    </script>
+    <div class="col-md-offset-2 col-md-8 panel" id="remove">
+        <!--Title-->
+        <h1 class="text-center">Password recovery</h1>
+        <!--Form-->
+        <form action="~/Home/Email" method="Post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" name="remail" placeholder="Please Enter your email address..." class="form-control" required />
+            </div>
+            <div id="result"></div>
+
+            <!--Add Button-->
+            <div>
+                <button id="b1" class="btn removeBtn">Send</button>
+            </div>
+        </form>
+    </div>
+
+
+
+</body>
